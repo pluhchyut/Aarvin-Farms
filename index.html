@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aarvin Farms - Rooted in earth. Growing with grace.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #F7F4EE;
+            --sage: #B7C7A5;
+            --sky: #CDE0D9;
+            --brown: #9B7B5F;
+            --charcoal: #2E2E2E;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--charcoal);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(247, 244, 238, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            border-bottom: 1px solid rgba(183, 199, 165, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--sage);
+        }
+
+        .coming-soon-nav {
+            opacity: 0.6;
+            font-style: italic;
+        }
+
+        /* Logo in Nav */
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)),
+                        url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            animation: fadeInUp 1.5s ease 0.3s backwards;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            animation: fadeInUp 1.5s ease 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            background: rgba(255,255,255,0.9);
+            color: var(--charcoal);
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            animation: fadeInUp 1.5s ease 0.9s backwards;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .sound-toggle {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.5);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .sound-toggle:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Sections */
+        section {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem 10%;
+            text-align: center;
+        }
+
+        .section-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            max-width: 900px;
+            line-height: 1.9;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .section-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .what-is-farm {
+            background: var(--cream);
+        }
+
+        .what-is-earth {
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+                        url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1600') center/cover;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        /* Our Farm Grid */
+        .our-farm {
+            background: var(--sky);
+            padding: 6rem 5%;
+        }
+
+        .our-farm h2 {
+            font-size: 3.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .farm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .farm-card {
+            position: relative;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .farm-card:hover {
+            transform: scale(1.05);
+        }
+
+        .farm-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .farm-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .farm-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .farm-card:hover .farm-card-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .farm-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Activities */
+        .activities {
+            background: var(--cream);
+            padding: 6rem 5%;
+        }
+
+        .activities h2 {
+            font-size: 3.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .activity-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .activity-content {
+            padding: 2rem;
+        }
+
+        .activity-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .activity-card p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--sage);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Vacation Rentals */
+        .vacation {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                        url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600') center/cover;
+            color: white;
+            text-align: center;
+        }
+
+        .vacation h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .vacation-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            max-width: 700px;
+            line-height: 1.9;
+            margin-bottom: 3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--sage);
+            color: white;
+            text-align: center;
+            padding: 4rem 5%;
+        }
+
+        footer h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            opacity: 0.9;
+        }
+
+        .social-icons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-text {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .our-farm h2, .activities h2, .vacation h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><img src="logo.jpg" alt="Aarvin Farms Logo" class="logo" onclick="scrollToTop(event)" style="cursor: pointer;"></li>
+            <li><a href="#" onclick="scrollToTop(event)">Home</a></li>
+            <li><a href="#" onclick="scrollToSection(event, 'our-farm')">Our Farm</a></li>
+            <li><a href="#" onclick="scrollToSection(event, 'activities')">Activities</a></li>
+            <li><a href="#" onclick="scrollToSection(event, 'vacation')" class="coming-soon-nav">Vacation Rentals</a></li>
+            <li><a href="#" onclick="scrollToSection(event, 'contact')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1>Aarvin Farms</h1>
+        <div class="subtitle">Rooted in earth. Growing with grace.</div>
+        <div class="tagline">The soil remembers. The wind whispers. We listen, and we grow.</div>
+        <a href="#what-is-farm" class="btn">Begin the Journey ↓</a>
+        <button class="sound-toggle" onclick="toggleSound()">🔇 Ambient Sound</button>
+    </section>
+
+    <section class="what-is-farm" id="what-is-farm">
+        <div class="section-text">
+            A farm is more than fences and fields.<br>
+            It's a living heartbeat — where every sunrise is a promise,<br>
+            every blade of grass a prayer,<br>
+            and every creature a teacher.<br>
+            It's where the earth exhales, and we breathe in gratitude.
+        </div>
+    </section>
+
+    <section class="what-is-earth">
+        <div class="section-text">
+            The earth is not beneath us — it's within us.<br>
+            The soil feeds the seed, the seed feeds the soul.<br>
+            Here, we don't own the land.<br>
+            We belong to it.
+        </div>
+    </section>
+
+    <section class="our-farm" id="our-farm">
+        <h2>Our Farm</h2>
+        <div class="farm-grid">
+            <div class="farm-card">
+                <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=600" alt="Dairy">
+                <div class="farm-card-content">
+                    <h3>Dairy</h3>
+                    <p>Our mornings begin with soft light and gentle lowing.</p>
+                </div>
+            </div>
+            <div class="farm-card">
+                <img src="https://images.unsplash.com/photo-1563281577-a7be47e20db9?w=600" alt="Poultry">
+                <div class="farm-card-content">
+                    <h3>Poultry</h3>
+                    <p>Freedom has feathers.</p>
+                </div>
+            </div>
+            <div class="farm-card">
+                <img src="https://images.unsplash.com/photo-1584264849609-c17099229541?w=600" alt="Goats">
+                <div class="farm-card-content">
+                    <h3>Goats</h3>
+                    <p>The wild hearts that keep us humble.</p>
+                </div>
+            </div>
+            <div class="farm-card">
+                <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600" alt="The Land">
+                <div class="farm-card-content">
+                    <h3>The Land</h3>
+                    <p>We walk barefoot to remember what matters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="activities" id="activities">
+        <h2>Outdoor Activities</h2>
+        <div class="activity-grid">
+            <div class="activity-card">
+                <img src="https://images.unsplash.com/photo-1445704540984-8214b95ff012?w=600" alt="Fishing">
+                <div class="activity-content">
+                    <h3>Fishing</h3>
+                    <p>Still waters, steady hearts.</p>
+                </div>
+            </div>
+            <div class="activity-card">
+                <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=600" alt="Trail Riding">
+                <div class="activity-content">
+                    <h3>Trail Riding</h3>
+                    <p>Move with the land, not against it.</p>
+                </div>
+            </div>
+            <div class="activity-card">
+                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600" alt="Kayaking">
+                <div class="activity-content">
+                    <h3>Kayaking / Canoeing</h3>
+                    <p>Drift with the current. Let go of hurry.</p>
+                    <span class="badge">Coming Soon</span>
+                </div>
+            </div>
+            <div class="activity-card">
+                <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600" alt="ATV">
+                <div class="activity-content">
+                    <h3>ATV / Snowmobile</h3>
+                    <p>Adventure is balance — wild joy, gentle respect.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="vacation" id="vacation">
+        <h2>Vacation Rentals</h2>
+        <div class="vacation-text">
+            Stay with us, soon.<br>
+            Wake to the scent of rain and rosemary.<br>
+            Rest where time moves slower,<br>
+            and mornings still mean something.
+        </div>
+        <a href="#contact" class="btn">Be the First to Know 🌿</a>
+    </section>
+
+    <footer id="contact">
+        <h3>Aarvin Farms</h3>
+        <p>Living gently. Growing honestly.</p>
+        <p style="margin-top: 2rem; opacity: 0.7;">© 2025 Aarvin Farms — All rights reserved.</p>
+        <p style="font-style: italic; margin-top: 1rem;">"To nurture the earth is to nurture ourselves."</p>
+        <div class="social-icons">
+            <a href="#" title="Instagram">📷</a>
+            <a href="#" title="Facebook">📘</a>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-text').forEach(el => observer.observe(el));
+
+        // Scroll to top function
+        function scrollToTop(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Scroll to section function
+        function scrollToSection(e, sectionId) {
+            e.preventDefault();
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Sound toggle
+        let soundEnabled = false;
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.querySelector('.sound-toggle');
+            btn.textContent = soundEnabled ? '🔊 Ambient Sound' : '🔇 Ambient Sound';
+            // In production, you would load and play/pause actual audio here
+        }
+    </script>
+</body>
+</html>
