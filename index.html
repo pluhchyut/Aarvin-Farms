@@ -29,6 +29,8 @@
             color: var(--charcoal);
             line-height: 1.8;
             overflow-x: hidden;
+            opacity: 0;
+            background-color: black;
         }
 
         h1, h2, h3 {
@@ -494,7 +496,7 @@
     <section class="our-farm" id="our-farm">
         <h2>Our Farm</h2>
         <div class="farm-grid">
-            <a href="our-story.html" class="farm-card-link">
+            <a href="cards/our-story.html" class="farm-card-link">
                 <div class="farm-card">
                     <img src="photos/our-story.jpg" alt="Our Story">
                     <div class="farm-card-overlay">
@@ -504,7 +506,7 @@
                     </div>
                 </div>
             </a>
-            <a href="philosophy.html" class="farm-card-link">
+            <a href="cards/philosophy.html" class="farm-card-link">
                 <div class="farm-card">
                     <img src="photos/brownie-present-2.jpg" alt="Our Philosophy">
                     <div class="farm-card-overlay">
@@ -514,7 +516,7 @@
                     </div>
                 </div>
             </a>
-            <a href="animals.html" class="farm-card-link">
+            <a href="cards/animals.html" class="farm-card-link">
                 <div class="farm-card">
                     <img src="photos/ben-moreland-auijD19Byq8-unsplash.jpg" alt="Our Animals">
                     <div class="farm-card-overlay">
@@ -524,7 +526,7 @@
                     </div>
                 </div>
             </a>
-            <a href="land.html" class="farm-card-link">
+            <a href="cards/land.html" class="farm-card-link">
                 <div class="farm-card">
                     <img src="photos/brownie-present-1.jpg" alt="Our Land">
                     <div class="farm-card-overlay">
@@ -534,7 +536,7 @@
                     </div>
                 </div>
             </a>
-            <a href="family.html" class="farm-card-link">
+            <a href="cards/family.html" class="farm-card-link">
                 <div class="farm-card">
                     <img src="photos/family.jpg" alt="The Family">
                     <div class="farm-card-overlay">
@@ -544,7 +546,7 @@
                     </div>
                 </div>
             </a>
-            <a href="products.html" class="farm-card-link">
+            <a href="cards/products.html" class="farm-card-link">
                 <div class="farm-card">
                     <img src="photos/products.jpg" alt="Our Products">
                     <div class="farm-card-overlay">
@@ -554,7 +556,7 @@
                     </div>
                 </div>
             </a>
-            <a href="farm-life.html" class="farm-card-link">
+            <a href="cards/farm-life.html" class="farm-card-link">
                 <div class="farm-card">
                     <img src="photos/farm-life.jpg" alt="Farm Life">
                     <div class="farm-card-overlay">
@@ -564,7 +566,7 @@
                     </div>
                 </div>
             </a>
-            <a href="promise.html" class="farm-card-link">
+            <a href="cards/promise.html" class="farm-card-link">
                 <div class="farm-card">
                     <img src="photos/promise.jpg" alt="Our Promise">
                     <div class="farm-card-overlay">
@@ -674,6 +676,29 @@
             btn.textContent = soundEnabled ? '🔊 Ambient Sound' : '🔇 Ambient Sound';
             // In production, you would load and play/pause actual audio here
         }
+
+        // Smooth fade-in on page load from black
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 1.2s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Add smooth transition when clicking farm cards (fade to black)
+        document.querySelectorAll('.farm-card-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                
+                document.body.style.transition = 'opacity 0.8s ease';
+                document.body.style.opacity = '0';
+                
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 800);
+            });
+        });
     </script>
 </body>
 </html>

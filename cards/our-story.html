@@ -31,6 +31,7 @@
             line-height: 1.8;
             overflow-x: hidden;
             background-color: black;
+            opacity: 0;
         }
 
         main {
@@ -238,7 +239,7 @@
     </style>
 </head>
 <body>
-    <a href="index.html" class="home-btn">← Back to Home</a>
+    <a href="../index.html" class="home-btn">← Back to Home</a>
 
     <div class="scroll-indicator">↓</div>
 
@@ -346,5 +347,46 @@
     <footer>
         <p>That's our story 🌿</p>
     </footer>
+
+    <script>
+        // Smooth transition back to home on last scroll
+        let isTransitioning = false;
+        
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            // When user scrolls past the last section
+            if (scrollPosition >= documentHeight - 50 && !isTransitioning) {
+                isTransitioning = true;
+                document.body.style.transition = 'opacity 0.8s ease';
+                document.body.style.opacity = '0';
+                
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 800);
+            }
+        });
+
+        // Smooth fade-in on page load from black
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 1.2s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Smooth transition for home button
+        document.querySelector('.home-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            document.body.style.transition = 'opacity 0.8s ease';
+            document.body.style.opacity = '0';
+            
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 800);
+        });
+    </script>
 </body>
 </html>
